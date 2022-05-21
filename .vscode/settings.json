@@ -5,7 +5,7 @@
     "source.fixAll.eslint": true
   },
   "files.associations": {
-    "*.css": "postcss"
+    "*.css": "css"
   },
   "[vue]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
