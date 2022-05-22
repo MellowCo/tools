@@ -1,7 +1,7 @@
 <!--
  * @Author: licl
  * @Date: 2022-05-21 19:58:44
- * @LastEditTime: 2022-05-22 16:06:18
+ * @LastEditTime: 2022-05-22 18:16:55
  * @LastEditors: licl
  * @Description: 侧边栏
 -->
@@ -20,11 +20,17 @@ defineProps({
 const menuOptions: MenuOption[] = generateMenu(routes)
 const router = useRouter()
 
-function handleUpdateValue(_: any, item: MenuOption) {
-  const { path } = item
+console.log(router)
 
-  if (path)
-    router.push(path as string)
+function handleUpdateValue(_: any, item: MenuOption) {
+  const { key } = item
+
+  router.push({
+    name: key as string,
+    query: {
+      a: 1,
+    },
+  })
 }
 </script>
 

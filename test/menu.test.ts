@@ -16,32 +16,68 @@ describe('menu', () => {
     expect(menuOptions).toMatchInlineSnapshot(`
       [
         {
+          "icon": undefined,
+          "key": "index",
+          "label": "index",
+          "meta": undefined,
+          "path": "/",
+        },
+        {
           "children": [
             {
-              "icon": [Function],
-              "key": "home",
-              "label": "电商",
+              "icon": undefined,
+              "key": "shopJd",
+              "label": "京东",
               "meta": {
-                "icon": {
-                  "name": "Home",
-                  "render": [Function],
-                },
-                "title": "电商",
+                "title": "京东",
               },
-              "path": "/home",
+              "path": "jd",
             },
           ],
           "icon": [Function],
-          "key": "home",
+          "key": "shop",
           "label": "电商",
           "meta": {
             "icon": {
-              "name": "Home",
+              "name": "ShopOutlined",
               "render": [Function],
             },
             "title": "电商",
           },
-          "path": "/",
+          "path": "/shop",
+        },
+        {
+          "children": [
+            {
+              "icon": undefined,
+              "key": "testIndex",
+              "label": "测试菜单",
+              "meta": {
+                "title": "测试菜单",
+              },
+              "path": "index",
+            },
+            {
+              "icon": undefined,
+              "key": "testIndex2",
+              "label": "测试菜单2",
+              "meta": {
+                "title": "测试菜单2",
+              },
+              "path": "index2",
+            },
+          ],
+          "icon": [Function],
+          "key": "test",
+          "label": "测试",
+          "meta": {
+            "icon": {
+              "name": "ExperimentTwotone",
+              "render": [Function],
+            },
+            "title": "测试",
+          },
+          "path": "/test",
         },
       ]
     `)

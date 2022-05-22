@@ -1,36 +1,26 @@
 /*
  * @Author: licl
  * @Date: 2022-05-21 20:02:09
- * @LastEditTime: 2022-05-22 15:50:54
+ * @LastEditTime: 2022-05-22 18:48:44
  * @LastEditors: licl
  * @Description:
  */
 import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
-import { Home } from '@vicons/ionicons5'
-import Layout from '~/layout/index.vue'
+import ShopRoutes from './modules/shop'
+import TestRoutes from './modules/test'
 
 export const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    name: 'home',
-    component: Layout,
-    redirect: '/home',
+    name: 'index',
+    redirect: '/shop',
     meta: {
-      icon: Home,
-      title: '电商',
+      hide: true,
     },
-    children: [
-      {
-        path: 'home',
-        name: 'home',
-        component: () => import('~/pages/home/index.vue'),
-        meta: {
-          title: '京东',
-        },
-      },
-    ],
   },
+  ...ShopRoutes,
+  ...TestRoutes,
 ]
 
 const router = createRouter({

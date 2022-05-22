@@ -1,7 +1,7 @@
 /*
  * @Author: licl
  * @Date: 2022-05-21 21:19:08
- * @LastEditTime: 2022-05-22 15:46:26
+ * @LastEditTime: 2022-05-22 18:49:00
  * @LastEditors: licl
  * @Description:
  */
@@ -31,18 +31,20 @@ export function generateMenu(routes: RouteRecordRaw[]): MenuOption[] {
   routes.forEach((route) => {
     const { children, name, meta, path } = route
 
-    const menuItem: MenuOption = {
-      label: meta?.title || name,
-      icon: meta?.icon && renderIcon(meta?.icon),
-      key: name as string,
-      path,
-      meta,
+    if (!meta?.hide) {
+      const menuItem: MenuOption = {
+        label: meta?.title || name,
+        icon: meta?.icon && renderIcon(meta?.icon),
+        key: name as string,
+        path,
+        meta,
+      }
+
+      if (children)
+        menuItem.children = generateMenu(children)
+
+      menu.push(menuItem)
     }
-
-    if (children)
-      menuItem.children = generateMenu(children)
-
-    menu.push(menuItem)
   })
 
   return menu

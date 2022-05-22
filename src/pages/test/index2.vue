@@ -1,5 +1,11 @@
+<!--
+ * @Author: licl
+ * @Date: 2022-05-22 18:32:03
+ * @LastEditTime: 2022-05-22 18:32:14
+ * @LastEditors: licl
+ * @Description:
+-->
 <script setup lang="ts">
-const props = defineProps<{ name: string }>()
 const router = useRouter()
 </script>
 
@@ -7,10 +13,10 @@ const router = useRouter()
   <div>
     <div i-carbon-pedestrian text-4xl inline-block />
     <p>
-      Hi, {{ props.name }}
+      Hi,
     </p>
     <p text-sm op50>
-      <em>Dynamic route!</em>
+      <em>Dynamic route222222222!</em>
     </p>
 
     <div>
