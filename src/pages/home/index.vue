@@ -1,17 +1,18 @@
 <!--
  * @Author: licl
- * @Date: 2022-05-21 19:58:07
- * @LastEditTime: 2022-05-22 15:52:46
+ * @Date: 2022-05-22 15:28:36
+ * @LastEditTime: 2022-05-22 15:50:04
  * @LastEditors: licl
  * @Description:
 -->
 <script setup lang="ts">
-import Menu from '~/layout/components/Menu'
+
 </script>
 
 <template>
-  <Menu />
-  <router-view />
+  <div>
+    wwwwwwwwwwwww
+  </div>
 </template>
 
 <style scoped>
