@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "test": "vitest",
     "tauri": "tauri init",
-    "tauri:dev": "tauri dev"
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build"
   },
   "dependencies": {
     "@tauri-apps/api": "1.0.0-rc.5",

@@ -1,7 +1,7 @@
 /*
  * @Author: licl
  * @Date: 2022-05-22 18:34:13
- * @LastEditTime: 2022-05-22 18:34:14
+ * @LastEditTime: 2022-05-22 19:04:42
  * @LastEditors: licl
  * @Description:
  */
@@ -23,7 +23,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'jd',
         name: 'shopJd',
-        component: () => import('~/pages/home/index.vue'),
+        component: () => import('~/pages/shop/index.vue'),
         meta: {
           title: '京东',
         },

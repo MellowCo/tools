@@ -12,7 +12,12 @@
   },
   "tauri": {
     "allowlist": {
-      "all": true
+      "all": false,
+      "http": {
+        "all": false,
+        "request": true,
+        "scope": ["https://item.jd.com/*"]
+      }
     },
     "bundle": {
       "active": true,
@@ -29,7 +34,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "cn.licl.tools",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
@@ -44,7 +49,10 @@
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
-        "timestampUrl": ""
+        "timestampUrl": "",
+        "wix": {
+          "language": "zh-CN"
+        }
       }
     },
     "security": {
