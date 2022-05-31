@@ -16,7 +16,7 @@
       "http": {
         "all": false,
         "request": true,
-        "scope": ["https://item.jd.com/*"]
+        "scope": ["https://item.jd.com/*","https://cd.jd.com/*","https://item.m.jd.com/*","https://api.m.jd.com/*"]
       }
     },
     "bundle": {

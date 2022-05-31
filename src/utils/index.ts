@@ -1,7 +1,7 @@
 /*
  * @Author: licl
  * @Date: 2022-05-21 21:19:08
- * @LastEditTime: 2022-05-22 18:49:00
+ * @LastEditTime: 2022-05-31 20:54:36
  * @LastEditors: licl
  * @Description:
  */
@@ -48,4 +48,11 @@ export function generateMenu(routes: RouteRecordRaw[]): MenuOption[] {
   })
 
   return menu
+}
+
+export function addHttps(url: string) {
+  if (url.startsWith('//'))
+    return url.replace('//', 'https://')
+
+  return url
 }
