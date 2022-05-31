@@ -6,3 +6,6 @@ GET https://cd.jd.com/description/channel?skuId=100031406014&mainSkuId=100031406
 
 ### 
 GET https://api.m.jd.com/ware/detail/getIntroduceInfo?loginType=2&appid=m_core&uuid=3374140451021162&functionId=item_intruduce_info&body={"externalLoginType":1,"par":"100023267092_d100023267092_normal"} HTTP/1.1
+
+###
+GET https://item-soa.jd.com/getWareBusiness?skuId=100026699914&cat=9987%2C653%2C655&area=15_1290_22046_59448&shopId=1000351862&venderId=1000351862&paramJson=%7B%22platform2%22%3A%221%22%2C%22specialAttrStr%22%3A%22p0pppp1ppp1pppp1ppppppppppp%22%2C%22skuMarkStr%22%3A%2200%22%7D&num=1 HTTP/1.1

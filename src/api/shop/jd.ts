@@ -1,19 +1,36 @@
 /*
  * @Author: licl
  * @Date: 2022-05-22 19:07:21
- * @LastEditTime: 2022-05-31 20:56:04
+ * @LastEditTime: 2022-05-31 21:51:47
  * @LastEditors: licl
  * @Description:
  */
 import { ResponseType, fetch } from '@tauri-apps/api/http'
 import type { CheerioAPI } from 'cheerio'
 import json5 from 'json5'
+import { stringify } from 'qs'
 import { addHttps } from '~/utils'
 
 enum JD_CONFIG {
   IMG_BASE_URL = 'https://m.360buyimg.com/mobilecms/s750x750_',
   PRODUCT_URL = 'https://item.jd.com',
+  BUSINESS_URL = 'https://item-soa.jd.com/getWareBusiness',
 }
+
+export interface JdProduct {
+  name: string
+  specImgs: string[]
+  descImgs: string[]
+  price: string
+}
+
+// skuId: 100019718235
+// cat: 670,671,2694
+// area: 15_1290_1291_59463
+// shopId: 1000000127
+// venderId: 1000000127
+// paramJson: {"platform2":"100000000001","specialAttrStr":"p0ppppppppp2p1pppppppppppp","skuMarkStr":"00"}
+// num: 1
 
 interface PageConfig {
   // 规格图列表
@@ -22,17 +39,26 @@ interface PageConfig {
   desc: string
   // 商品名称
   name: string
+  skuid: number
+  cat: number[]
+  shopId: string
+  venderId: number
+  paramJson: string
 }
 
-export async function fetchJd(code: string) {
-  const { imageList, desc } = await getJdHtml(code)
+export async function fetchJd(code: string): Promise<JdProduct> {
+  const pageConfig = await getJdHtml(code)
+  const { imageList, desc, name } = pageConfig
 
   const specImgs = getSpecImgs(imageList)
   const descImgs = await getDescImgs(desc)
+  const price = await getBusiness(pageConfig)
 
   return {
     specImgs,
     descImgs,
+    name,
+    price,
   }
 }
 
@@ -77,6 +103,28 @@ export async function getDescImgs(desc: string) {
   const descUrl = addHttps(desc)
   const { data: { content } } = await fetch<{ content: string }>(descUrl)
   return Array.from(content.matchAll(/url\(([\/\d\w\.]*)\)/g)).map(item => item[1])
+}
+
+export async function getBusiness(pageConfig: PageConfig) {
+  const { cat, paramJson, shopId, skuid, venderId } = pageConfig
+
+  const queryData = {
+    paramJson,
+    shopId,
+    skuId: skuid,
+    venderId,
+    cat: cat.join(','),
+    area: '15_1290_1291_59463',
+    num: 1,
+  }
+
+  const url = `${JD_CONFIG.BUSINESS_URL}?${stringify(queryData)}`
+
+  const { data } = await fetch<{ price: { p: string } }>(url, {
+    method: 'GET',
+  })
+
+  return data.price.p
 }
 
 /**

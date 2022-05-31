@@ -14,9 +14,13 @@
     "allowlist": {
       "all": false,
       "http": {
-        "all": false,
+        "all": true,
         "request": true,
-        "scope": ["https://item.jd.com/*","https://cd.jd.com/*","https://item.m.jd.com/*","https://api.m.jd.com/*"]
+        "scope": [
+          "https://item.jd.com/*",
+          "https://cd.jd.com/*",
+          "https://item-soa.jd.com/*"
+        ]
       }
     },
     "bundle": {
