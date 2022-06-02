@@ -1,7 +1,7 @@
 <!--
  * @Author: licl
  * @Date: 2022-05-21 19:58:44
- * @LastEditTime: 2022-05-28 22:30:43
+ * @LastEditTime: 2022-06-02 20:50:59
  * @LastEditors: licl
  * @Description: 侧边栏
 -->
@@ -18,6 +18,7 @@ defineProps({
 })
 
 const menuOptions: MenuOption[] = generateMenu(routes)
+
 const router = useRouter()
 
 function handleUpdateValue(_: any, item: MenuOption) {
