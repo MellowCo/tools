@@ -4,7 +4,8 @@
     "beforeBuildCommand": "nr build",
     "beforeDevCommand": "nr dev",
     "devPath": "http://localhost:3333",
-    "distDir": "../dist"
+    "distDir": "../dist",
+    "withGlobalTauri":true
   },
   "package": {
     "productName": "tools",
@@ -17,9 +18,7 @@
         "all": true,
         "request": true,
         "scope": [
-          "https://item.jd.com/*",
-          "https://cd.jd.com/*",
-          "https://item-soa.jd.com/*"
+          "https://**"
         ]
       }
     },

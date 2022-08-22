@@ -1,10 +1,3 @@
-/*
- * @Author: licl
- * @Date: 2022-05-22 19:07:21
- * @LastEditTime: 2022-05-31 21:51:47
- * @LastEditors: licl
- * @Description:
- */
 import { ResponseType, fetch } from '@tauri-apps/api/http'
 import type { CheerioAPI } from 'cheerio'
 import json5 from 'json5'
@@ -19,7 +12,9 @@ enum JD_CONFIG {
 
 export interface JdProduct {
   name: string
+  // 规格图
   specImgs: string[]
+  // 描述图
   descImgs: string[]
   price: string
 }
@@ -142,11 +137,11 @@ export function getImgSrc(ch: CheerioAPI, domSelector: string): string[] {
  */
 function transformImg(urls: string[] | string) {
   if (Array.isArray(urls))
-    return urls.map(url => replace(url))
+    return urls.map(url => replaceImg(url))
   else
-    return replace(urls)
+    return replaceImg(urls)
 }
 
-function replace(url: string) {
+function replaceImg(url: string) {
   return url.replace(/54x54/g, '450x450').replace(/50x64/g, '350x449').replace(/50x66/g, '350x467').replace(/\/n5/g, '/n1')
 }

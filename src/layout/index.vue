@@ -1,10 +1,3 @@
-<!--
- * @Author: licl
- * @Date: 2022-05-21 19:58:07
- * @LastEditTime: 2022-06-02 21:02:14
- * @LastEditors: licl
- * @Description:
--->
 <script setup lang="ts">
 import Menu from '~/layout/components/Menu'
 import Header from '~/layout/components/Header'
@@ -21,6 +14,7 @@ const collapsed = ref(false)
       :width="240"
       :collapsed="collapsed"
       show-trigger
+      bordered
       class="min-h-100vh"
       :native-scrollbar="false"
       @collapse="collapsed = true"
@@ -41,7 +35,6 @@ const collapsed = ref(false)
       <n-layout-content
         class="content-default-background pt-44px"
         position="absolute"
-        content-style="padding: 10px;"
         :native-scrollbar="false"
       >
         <router-view />
