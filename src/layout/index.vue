@@ -26,14 +26,14 @@ const collapsed = ref(false)
 
     <n-layout>
       <!-- header -->
-      <n-layout-header class="fixed z-10">
+      <n-layout-header position="absolute" class="z-10">
         <Header v-model:collapsed="collapsed" />
       </n-layout-header>
       <!-- header -->
 
       <!-- content -->
       <n-layout-content
-        class="content-default-background pt-44px"
+        class="bg-gray-100 pt-44px"
         position="absolute"
         :native-scrollbar="false"
       >
@@ -43,9 +43,3 @@ const collapsed = ref(false)
     </n-layout>
   </n-layout>
 </template>
-
-<style lang="less" scoped>
-.content-default-background{
-  background-color: #f7f7f7;
-}
-</style>

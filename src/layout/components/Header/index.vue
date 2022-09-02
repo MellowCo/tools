@@ -1,13 +1,12 @@
 <!--
  * @Author: licl
  * @Date: 2022-05-22 16:08:27
- * @LastEditTime: 2022-06-02 20:57:44
+ * @LastEditTime: 2022-09-02 21:56:05
  * @LastEditors: licl
  * @Description:
 -->
 <script setup lang="ts">
 import MenuCollapsed from './components/MenuCollapsed.vue'
-import Setting from './components/Setting.vue'
 
 defineProps({
   collapsed: {
@@ -18,10 +17,11 @@ defineProps({
 </script>
 
 <template>
-  <div class="h-44px box-border px-5 flex items-center header-shadow justify-between">
+  <div class="h-44px box-border px-5 flex items-center header-shadow justify-between z-11 ">
     <MenuCollapsed :collapsed="collapsed" @on-click="() => $emit('update:collapsed', !collapsed)" />
-    <div class="cursor-pointer">
-      <Setting />
+
+    <div class="flex text-base">
+      <div cursor="pointer" i="carbon-settings" />
     </div>
   </div>
 </template>
