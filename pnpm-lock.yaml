@@ -24,6 +24,7 @@ specifiers:
   unocss: ^0.45.14
   unplugin-auto-import: ^0.11.2
   unplugin-vue-components: ^0.22.4
+  vanilla-jsoneditor: ^0.7.0
   vfonts: ^0.0.3
   vite: ^3.0.9
   vitest: ^0.22.1
@@ -37,6 +38,7 @@ dependencies:
   cheerio: 1.0.0-rc.12
   json5: 2.2.1
   qs: 6.11.0
+  vanilla-jsoneditor: 0.7.0
   vue: 3.2.38
   vue-router: 4.1.5_vue@3.2.38
 
@@ -4127,6 +4129,10 @@ packages:
       spdx-correct: 3.1.1
       spdx-expression-parse: 3.0.1
     dev: true
+
+  /vanilla-jsoneditor/0.7.0:
+    resolution: {integrity: sha512-xtgEI8jO8f66yMrS4IFtF44El6V6Mhk83+6c4Za0XCob1cDz3c1SkNN76a2bT/0FTDd9n0LA+U1xkinGPKCrOw==}
+    dev: false
 
   /vdirs/0.1.8_vue@3.2.38:
     resolution: {integrity: sha512-H9V1zGRLQZg9b+GdMk8MXDN2Lva0zx72MPahDKc30v+DtwKjfyOSXWRIX4t2mhDubM1H09gPhWeth/BJWPHGUw==}
