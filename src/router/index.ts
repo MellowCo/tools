@@ -1,18 +1,16 @@
 import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
-import ShopRoutes from './modules/shop'
 import TextRoutes from './modules/text'
 
 export const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'index',
-    redirect: '/shop',
+    redirect: '/text',
     meta: {
       hide: true,
     },
   },
-  ...ShopRoutes,
   ...TextRoutes,
 ]
 

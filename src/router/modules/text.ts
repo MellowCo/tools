@@ -1,5 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router'
-import { ExperimentTwotone } from '@vicons/antd'
+import { FileTextOutlined } from '@vicons/antd'
+import { Json } from '@vicons/carbon'
 import Layout from '~/layout/index.vue'
 
 const routes: RouteRecordRaw[] = [
@@ -7,14 +8,14 @@ const routes: RouteRecordRaw[] = [
     path: '/text',
     name: 'text',
     component: Layout,
-    redirect: '/text/index',
+    redirect: '/text/json',
     meta: {
-      icon: ExperimentTwotone,
+      icon: FileTextOutlined,
       title: '文本处理',
     },
     children: [
       {
-        path: 'index',
+        path: 'json',
         name: 'json',
         component: () => import('~/pages/text/json/index.vue'),
         meta: {
@@ -22,11 +23,11 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        path: 'index2',
-        name: 'testIndex2',
-        component: () => import('~/pages/test/index2.vue'),
+        path: 'diff',
+        name: 'diff',
+        component: () => import('~/pages/text/diff/index.vue'),
         meta: {
-          title: '测试菜单2',
+          title: 'diff',
         },
       },
     ],
