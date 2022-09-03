@@ -30,7 +30,7 @@ onMounted(() => {
 }
 
 .customer-theme{
-  --jse-theme-color: #3883fa;
-  --jse-theme-color-highlight: #5f9dff;
+  --jse-theme-color: #18a058;
+  --jse-theme-color-highlight: #1cb362e0;
 }
 </style>
