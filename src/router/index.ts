@@ -1,14 +1,7 @@
-/*
- * @Author: licl
- * @Date: 2022-05-21 20:02:09
- * @LastEditTime: 2022-05-22 18:48:44
- * @LastEditors: licl
- * @Description:
- */
 import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
 import ShopRoutes from './modules/shop'
-import TestRoutes from './modules/test'
+import TextRoutes from './modules/text'
 
 export const routes: RouteRecordRaw[] = [
   {
@@ -20,7 +13,7 @@ export const routes: RouteRecordRaw[] = [
     },
   },
   ...ShopRoutes,
-  ...TestRoutes,
+  ...TextRoutes,
 ]
 
 const router = createRouter({

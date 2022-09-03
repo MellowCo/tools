@@ -4,21 +4,21 @@ import Layout from '~/layout/index.vue'
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '/test',
-    name: 'test',
+    path: '/text',
+    name: 'text',
     component: Layout,
-    redirect: '/test/index',
+    redirect: '/text/index',
     meta: {
       icon: ExperimentTwotone,
-      title: '测试',
+      title: '文本处理',
     },
     children: [
       {
         path: 'index',
-        name: 'testIndex',
-        component: () => import('~/pages/test/index.vue'),
+        name: 'json',
+        component: () => import('~/pages/text/json/index.vue'),
         meta: {
-          title: '测试菜单',
+          title: 'json',
         },
       },
       {
