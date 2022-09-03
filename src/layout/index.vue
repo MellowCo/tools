@@ -39,10 +39,15 @@ const collapsed = ref(false)
           position="absolute"
           :native-scrollbar="false"
         >
-          <router-view />
+          <router-view #="{Component}">
+            <keep-alive>
+              <component :is="Component" />
+            </keep-alive>
+          </router-view>
         </n-layout-content>
       <!-- content -->
       </n-layout>
     </n-layout>
   </NConfigProvider>
 </template>
+
