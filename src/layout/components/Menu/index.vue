@@ -1,10 +1,3 @@
-<!--
- * @Author: licl
- * @Date: 2022-05-21 19:58:44
- * @LastEditTime: 2022-06-02 20:50:59
- * @LastEditors: licl
- * @Description: 侧边栏
--->
 <script setup lang="ts">
 import type { MenuOption } from 'naive-ui'
 import { routes } from '~/router'
@@ -26,9 +19,6 @@ function handleUpdateValue(_: any, item: MenuOption) {
 
   router.push({
     name: key as string,
-    query: {
-      a: 1,
-    },
   })
 }
 </script>

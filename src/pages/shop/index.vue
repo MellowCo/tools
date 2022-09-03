@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// 2022-09-03 京东看商品 也要登录了 。。。
 import { CloudUploadOutlined, SearchOutlined } from '@vicons/antd'
 import type { JdProduct } from '~/api/shop/jd'
 import { fetchJd } from '~/api/shop/jd'
