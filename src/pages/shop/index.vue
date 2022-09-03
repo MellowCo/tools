@@ -21,7 +21,7 @@ function handleSearch() {
 
 <template>
   <div class="p-3">
-    <div class="flex justify-center gap-2 bg-white p-3">
+    <div class="flex justify-center gap-2 p-3 bg-base border-base border">
       <div class="w-8/12 flex">
         <n-select
           v-model:value="codes"
@@ -33,7 +33,7 @@ function handleSearch() {
           :show="false"
         />
       </div>
-      <n-button strong type="warning">
+      <n-button strong secondary type="warning">
         <template #icon>
           <n-icon>
             <CloudUploadOutlined />
@@ -41,7 +41,7 @@ function handleSearch() {
         </template>
       </n-button>
 
-      <n-button strong type="info" @click="handleSearch">
+      <n-button strong secondary type="info" @click="handleSearch">
         <template #icon>
           <n-icon>
             <SearchOutlined />
@@ -52,7 +52,7 @@ function handleSearch() {
 
     <!-- {{ products }} -->
 
-    <div v-for="(product, pIndex) in products" :key="pIndex" class="p-4 bg-white mt-3 rounded-2">
+    <div v-for="(product, pIndex) in products" :key="pIndex" class="p-4 mt-3 rounded-2 bg-base border border-base">
       <div class="text-lg font-bold">
         {{ product.name }}
       </div>

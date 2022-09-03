@@ -1,7 +1,7 @@
 <!--
  * @Author: licl
  * @Date: 2022-05-22 16:08:27
- * @LastEditTime: 2022-09-02 21:56:05
+ * @LastEditTime: 2022-09-03 10:02:37
  * @LastEditors: licl
  * @Description:
 -->
@@ -21,6 +21,7 @@ defineProps({
     <MenuCollapsed :collapsed="collapsed" @on-click="() => $emit('update:collapsed', !collapsed)" />
 
     <div class="flex text-base">
+      <div m="r4" cursor="pointer" dark:i-carbon-moon i-carbon-sun @click="toggleDark()" />
       <div cursor="pointer" i="carbon-settings" />
     </div>
   </div>
