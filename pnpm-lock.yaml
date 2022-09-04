@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@antfu/eslint-config': ^0.26.3
   '@iconify-json/carbon': ^1.1.7
+  '@meoc/utils': ^0.1.8
   '@tauri-apps/api': 1.0.2
   '@tauri-apps/cli': 1.0.5
   '@types/node': ^18.7.14
@@ -34,6 +35,7 @@ specifiers:
   vue-tsc: ^0.40.5
 
 dependencies:
+  '@meoc/utils': 0.1.8
   '@tauri-apps/api': 1.0.2
   '@vueuse/core': 9.1.1_vue@3.2.38
   cheerio: 1.0.0-rc.12
@@ -349,6 +351,12 @@ packages:
   /@juggle/resize-observer/3.3.1:
     resolution: {integrity: sha512-zMM9Ds+SawiUkakS7y94Ymqx+S0ORzpG3frZirN3l+UlXUmSUR7hF4wxCVqW+ei94JzV5kt0uXBcoOEAuiydrw==}
     dev: true
+
+  /@meoc/utils/0.1.8:
+    resolution: {integrity: sha512-72YUMtzt6NuPOTzYQSjgwmrhCi7xNqgYf3kiPzv7EP3nwg07UBPQXq4ITQVEotxOgnEQwgLtdnlbjWSIsE7djw==}
+    dependencies:
+      dayjs: 1.11.5
+    dev: false
 
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -1440,6 +1448,10 @@ packages:
     resolution: {integrity: sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==}
     engines: {node: '>=0.11'}
     dev: true
+
+  /dayjs/1.11.5:
+    resolution: {integrity: sha512-CAdX5Q3YW3Gclyo5Vpqkgpj8fSdLQcRuzfX6mC6Phy0nfJ0eGYOeS7m4mt2plDWLAtA4TqTakvbboHvUxfe4iA==}
+    dev: false
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
