@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import * as monaco from 'monaco-editor'
 import type { FormValidationStatus } from 'naive-ui/es/form/src/interface'
+import { toCharArray } from '@meoc/utils'
+import { regexModifierOptions } from '~/enum'
 
 const regexEditorRef = $ref(null)
 
 let editor: monaco.editor.IStandaloneCodeEditor
 
 let decorations: string[] = []
-
-// \(\w*\)
-const regexStr = $ref('')
-let inputStatus = $ref<FormValidationStatus | undefined>()
 
 onMounted(() => {
   editor = monaco.editor.create(regexEditorRef as any, {
@@ -23,7 +21,27 @@ onMounted(() => {
   useVsTheme(editor)
 })
 
+// /\s:?class="((?:\n|.)*?)"/g
+// \(\w*\)
+let regex: RegExp
+let regexStr = $ref('')
+let regexModifierArr = $ref<string[]>([])
+let regexModifier = $ref('')
+
+let inputStatus = $ref<FormValidationStatus | undefined>()
+
 function onRegexChange(str: string) {
+  const [_, _regexStr = str, _modifier = regexModifier] = str.match(/\/([\s\S]*)\/([a-z]*)/) || []
+
+  regexStr = _regexStr
+  regexModifier = _modifier
+  regexModifierArr = toCharArray(_modifier)
+
+  regexMatch()
+}
+
+function onModifierChange(str: string[]) {
+  regexModifier = str.join('')
   regexMatch()
 }
 
@@ -32,10 +50,14 @@ function regexMatch() {
   let deltaDecorations: monaco.editor.IModelDeltaDecoration[] = []
 
   try {
-    const regex = new RegExp(regexStr)
+    regex = new RegExp(regexStr, regexModifier)
+    // console.log(regex)
+    // console.log(editor.getValue().match(regex))
 
     // @ts-ignore do it
-    const ranges = editor.getModel()?.findMatches(regex, true, true)
+    const ranges = editor.getModel()?.findMatches(regex, true, true, false, null, true)
+
+    // console.log(ranges)
 
     deltaDecorations = ranges?.map(({ range }) => {
       const { startLineNumber, startColumn, endLineNumber, endColumn } = range
@@ -63,14 +85,27 @@ function regexMatch() {
       </div>
       <div class="flex">
         <n-input
-          v-model:value="regexStr"
+          :value="regexStr"
           :status="inputStatus"
           type="text"
           placeholder="Tiny Input"
           @input="onRegexChange"
         >
           <template #suffix>
-            <div class="i-carbon-copy-file cursor-pointer" @click="regexMatch" />
+            <n-popselect
+              v-model:value="regexModifierArr"
+              :options="regexModifierOptions"
+              multiple
+              size="medium"
+              scrollable
+              @update:value="onModifierChange"
+            >
+              <div class="mr-3 cursor-pointer">
+                / <span class="color-#43a564 hover:color-white">{{ regexModifier }}</span>
+              </div>
+            </n-popselect>
+
+            <div class="i-carbon-copy-file cursor-pointer hover:color-#43a564" @click="regexMatch" />
           </template>
         </n-input>
       </div>
