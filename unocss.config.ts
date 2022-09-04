@@ -13,6 +13,7 @@ export default defineConfig({
     {
       'border-base': 'border-gray-500:10',
       'bg-base': 'bg-white dark:bg-#18181c',
+      'wh-full': 'w-full h-full',
     },
   ],
   presets: [
