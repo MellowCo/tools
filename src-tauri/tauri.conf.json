@@ -5,7 +5,7 @@
     "beforeDevCommand": "nr dev",
     "devPath": "http://localhost:3333",
     "distDir": "../dist",
-    "withGlobalTauri":true
+    "withGlobalTauri": true
   },
   "package": {
     "productName": "tools",
@@ -67,10 +67,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 600,
+        "height": 900,
         "resizable": true,
         "title": "tools",
-        "width": 800
+        "width": 1200
       }
     ]
   }
