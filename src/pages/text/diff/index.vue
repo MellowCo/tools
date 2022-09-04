@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import * as monaco from 'monaco-editor'
-import { vsTheme } from '~/enum/vsEnum'
 
 const diffRef = $ref(null)
 
@@ -9,27 +8,18 @@ let diffEditor: monaco.editor.IStandaloneDiffEditor
 onMounted(() => {
   const originalModel = monaco.editor.createModel('', 'text/plain')
   const modifiedModel = monaco.editor.createModel('', 'text/plain')
-  const theme = isDark.value ? vsTheme['vs-dark'] : vsTheme.vs
 
   diffEditor = monaco.editor.createDiffEditor(diffRef as any, {
     originalEditable: true,
     readOnly: false,
     automaticLayout: true,
-    theme,
   })
+
+  useVsTheme(diffEditor)
 
   diffEditor.setModel({
     original: originalModel,
     modified: modifiedModel,
-  })
-})
-
-watch(isDark, (dark) => {
-  const theme = dark ? vsTheme['vs-dark'] : vsTheme.vs
-
-  diffEditor.updateOptions({
-    // @ts-ignore do it
-    theme,
   })
 })
 
