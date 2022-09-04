@@ -1,7 +1,7 @@
 import type * as monaco from 'monaco-editor'
 import { vsTheme } from '~/enum/vsEnum'
 
-export function useVsTheme(editor: monaco.editor.IStandaloneDiffEditor): void {
+export function useVsTheme(editor: monaco.editor.IEditor): void {
   watch(isDark, (dark) => {
     const theme = dark ? vsTheme['vs-dark'] : vsTheme.vs
 
