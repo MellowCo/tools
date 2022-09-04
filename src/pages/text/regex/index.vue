@@ -21,9 +21,6 @@ onMounted(() => {
   useVsTheme(editor)
 })
 
-// /\s:?class="((?:\n|.)*?)"/g
-// \(\w*\)
-let regex: RegExp
 let regexStr = $ref('')
 let regexModifierArr = $ref<string[]>([])
 let regexModifier = $ref('')
@@ -50,24 +47,36 @@ function regexMatch() {
   let deltaDecorations: monaco.editor.IModelDeltaDecoration[] = []
 
   try {
-    regex = new RegExp(regexStr, regexModifier)
-    // console.log(regex)
-    // console.log(editor.getValue().match(regex))
+    const regex = new RegExp(regexStr, regexModifier)
 
-    // @ts-ignore do it
-    const ranges = editor.getModel()?.findMatches(regex, true, true, false, null, true)
+    const matchs = editor.getValue().match(regex) || []
 
-    // console.log(ranges)
+    // 是否为 g 全局匹配
+    const searchArr = matchs.input ? [Array.from(matchs)[0]] : Array.from(matchs)
 
-    deltaDecorations = ranges?.map(({ range }) => {
-      const { startLineNumber, startColumn, endLineNumber, endColumn } = range
-      return {
-        range: new monaco.Range(startLineNumber, startColumn, endLineNumber, endColumn),
-        options: {
-          className: 'regex-bg',
-        },
-      }
-    }) || []
+    const cacheMap: Record<string, number> = {}
+
+    searchArr.forEach((searchStr) => {
+      if (cacheMap[searchStr])
+        return
+
+      cacheMap[searchStr] = 1
+
+      // @ts-ignore do it
+      const ranges = editor.getModel()?.findMatches(searchStr, true, false, true, null, true)
+
+      const _deltaDecorations = ranges?.map(({ range }) => {
+        const { startLineNumber, startColumn, endLineNumber, endColumn } = range
+        return {
+          range: new monaco.Range(startLineNumber, startColumn, endLineNumber, endColumn),
+          options: {
+            className: 'regex-bg',
+          },
+        }
+      }) || []
+
+      deltaDecorations = [...deltaDecorations, ..._deltaDecorations]
+    })
   }
   catch (e) {
     inputStatus = 'error'
