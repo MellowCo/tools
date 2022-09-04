@@ -1,6 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
 import { FileTextOutlined } from '@vicons/antd'
-import { Json } from '@vicons/carbon'
 import Layout from '~/layout/index.vue'
 
 const routes: RouteRecordRaw[] = [
@@ -28,6 +27,14 @@ const routes: RouteRecordRaw[] = [
         component: () => import('~/pages/text/diff/index.vue'),
         meta: {
           title: 'diff',
+        },
+      },
+      {
+        path: 'regex',
+        name: 'regex',
+        component: () => import('~/pages/text/regex/index.vue'),
+        meta: {
+          title: 'regex',
         },
       },
     ],
