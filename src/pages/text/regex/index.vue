@@ -1,88 +1,26 @@
 <script setup lang="ts">
-import * as monaco from 'monaco-editor'
-import type { FormValidationStatus } from 'naive-ui/es/form/src/interface'
 import { toCharArray } from '@meoc/utils'
+import useInput from './hook/useInput'
+import useEditor from './hook/useEditor'
 import { regexModifierOptions } from '~/enum'
 
-const regexEditorRef = $ref(null)
+const { regexStr, regexModifierArr, regexModifier, inputStatus } = useInput()
 
-let editor: monaco.editor.IStandaloneCodeEditor
-
-let decorations: string[] = []
-
-onMounted(() => {
-  editor = monaco.editor.create(regexEditorRef as any, {
-    automaticLayout: true,
-  })
-
-  editor.onDidChangeModelContent((e) => {
-    regexMatch()
-  })
-  useVsTheme(editor)
-})
-
-let regexStr = $ref('')
-let regexModifierArr = $ref<string[]>([])
-let regexModifier = $ref('')
-
-let inputStatus = $ref<FormValidationStatus | undefined>()
+const { regexMatch, regexEditorRef } = useEditor(regexStr, regexModifierArr, regexModifier, inputStatus)
 
 function onRegexChange(str: string) {
-  const [_, _regexStr = str, _modifier = regexModifier] = str.match(/\/([\s\S]*)\/([a-z]*)/) || []
+  const [_, _regexStr = str, _modifier = regexModifier.value] = str.match(/\/([\s\S]*)\/([a-z]*)/) || []
 
-  regexStr = _regexStr
-  regexModifier = _modifier
-  regexModifierArr = toCharArray(_modifier)
+  regexStr.value = _regexStr
+  regexModifier.value = _modifier
+  regexModifierArr.value = toCharArray(_modifier)
 
   regexMatch()
 }
 
 function onModifierChange(str: string[]) {
-  regexModifier = str.join('')
+  regexModifier.value = str.join('')
   regexMatch()
-}
-
-function regexMatch() {
-  inputStatus = undefined
-  let deltaDecorations: monaco.editor.IModelDeltaDecoration[] = []
-
-  try {
-    const regex = new RegExp(regexStr, regexModifier)
-
-    const matchs = editor.getValue().match(regex) || []
-
-    // 是否为 g 全局匹配
-    const searchArr = matchs.input ? [Array.from(matchs)[0]] : Array.from(matchs)
-
-    const cacheMap: Record<string, number> = {}
-
-    searchArr.forEach((searchStr) => {
-      if (cacheMap[searchStr])
-        return
-
-      cacheMap[searchStr] = 1
-
-      // @ts-ignore do it
-      const ranges = editor.getModel()?.findMatches(searchStr, true, false, true, null, true)
-
-      const _deltaDecorations = ranges?.map(({ range }) => {
-        const { startLineNumber, startColumn, endLineNumber, endColumn } = range
-        return {
-          range: new monaco.Range(startLineNumber, startColumn, endLineNumber, endColumn),
-          options: {
-            className: 'regex-bg',
-          },
-        }
-      }) || []
-
-      deltaDecorations = [...deltaDecorations, ..._deltaDecorations]
-    })
-  }
-  catch (e) {
-    inputStatus = 'error'
-  }
-
-  decorations = editor.deltaDecorations(decorations, deltaDecorations)
 }
 </script>
 
@@ -133,8 +71,22 @@ function regexMatch() {
 </template>
 
 <style>
-.regex-bg{
-  background-color: #c5e893;
-  opacity: .6;
+.regex-match-bg{
+  background: #38590b;;
+  color: #dae0cf;
+}
+
+.regex-group-bg1{
+  background-color: #223c6e;
+  color:#d6deec;
+}
+
+.regex-group-bg2{
+  background-color: #513c8c;
+;
+}
+
+.regex-group-bg3{
+  background-color: #59460e;
 }
 </style>
