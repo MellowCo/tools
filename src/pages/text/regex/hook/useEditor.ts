@@ -31,9 +31,15 @@ export default function (regexStr: Ref<string>, regexModifierArr: Ref<string[]>,
       if (isGlobal) {
         // 全局匹配
         const matchs = Array.from(editor.getValue().matchAll(regex) || [])
+        const cacheMap: Record<string, number> = {}
 
         matchs.forEach((match) => {
           const [matchStr, ...groupStrs] = match
+
+          if (cacheMap[matchStr])
+            return
+
+          cacheMap[matchStr] = 1
 
           const ranges = editor.getModel()?.findMatches(matchStr, true, false, true, null, true)
           const _deltaDecorations: monaco.editor.IModelDeltaDecoration[] = []
