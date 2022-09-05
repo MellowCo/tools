@@ -29,9 +29,8 @@ export default function (regexStr: Ref<string>, regexModifierArr: Ref<string[]>,
     try {
       const regex = new RegExp(regexStr.value, regexModifier.value)
       if (isGlobal) {
+        // 全局匹配
         const matchs = Array.from(editor.getValue().matchAll(regex) || [])
-        // const cacheMap: Record<string, number> = {}
-        console.log(matchs)
 
         matchs.forEach((match) => {
           const [matchStr, ...groupStrs] = match
@@ -42,28 +41,26 @@ export default function (regexStr: Ref<string>, regexModifierArr: Ref<string[]>,
           ranges?.forEach(({ range }) => {
             const { startLineNumber, startColumn, endLineNumber, endColumn } = range
 
-            _deltaDecorations.push({
-              range: new monaco.Range(startLineNumber, startColumn, endLineNumber, endColumn),
-              options: {
-                className: 'regex-match-bg',
-              },
-            })
+            let startIndex = startColumn
 
             groupStrs.forEach((groupStr, index) => {
               if (!groupStr)
                 return
-
-              const startIndex = matchStr.indexOf(groupStr)
-              const groupStartColumn = startColumn + startIndex
+              // 计算 group 的位置
+              const groupStart = matchStr.indexOf(groupStr)
+              const groupStartColumn = startColumn + groupStart
               const groupEndColumn = groupStartColumn + groupStr.length
 
-              _deltaDecorations.push({
-                range: new monaco.Range(startLineNumber, groupStartColumn, endLineNumber, groupEndColumn),
-                options: {
-                  className: groupBgClass[index % groupBgClass.length],
-                },
-              })
+              // 设置 group 背景
+              _deltaDecorations.push(createDeltaDecoration(startLineNumber, groupStartColumn, endLineNumber, groupEndColumn, groupBgClass[index % groupBgClass.length]))
+
+              // 设置 macth 背景
+              _deltaDecorations.push(createDeltaDecoration(startLineNumber, startIndex, endLineNumber, groupStartColumn, 'regex-match-bg'))
+
+              startIndex = groupEndColumn
             })
+
+            _deltaDecorations.push(createDeltaDecoration(startLineNumber, startIndex, endLineNumber, endColumn, 'regex-match-bg'))
           })
 
           deltaDecorations = [...deltaDecorations, ..._deltaDecorations]
@@ -72,14 +69,19 @@ export default function (regexStr: Ref<string>, regexModifierArr: Ref<string[]>,
       // else { matchs = Array.from(editor.getValue().match(regex) || []) }
     }
     catch (e) {
-      console.log(e)
-
       inputStatus.value = 'error'
     }
 
-    console.log(deltaDecorations)
-
     decorations = editor.deltaDecorations(decorations, deltaDecorations)
+  }
+
+  function createDeltaDecoration(startLineNumber: number, groupStartColumn: number, endLineNumber: number, groupEndColumn: number, className: string) {
+    return {
+      range: new monaco.Range(startLineNumber, groupStartColumn, endLineNumber, groupEndColumn),
+      options: {
+        className,
+      },
+    }
   }
 
   return {
