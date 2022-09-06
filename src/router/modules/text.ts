@@ -10,7 +10,7 @@ const routes: RouteRecordRaw[] = [
     redirect: '/text/json',
     meta: {
       icon: FileTextOutlined,
-      title: '文本处理',
+      title: '文本',
     },
     children: [
       {

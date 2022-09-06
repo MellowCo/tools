@@ -70,23 +70,36 @@ function onModifierChange(str: string[]) {
   </div>
 </template>
 
-<style>
-.regex-match-bg{
-  background: #38590b;;
-  color: #dae0cf;
+<style lang="less">
+.regex-match-bg {
+  background: #cdf595;
+
+  .dark & {
+    background: #38590b;
+  }
 }
 
-.regex-group-bg1{
-  background-color: #223c6e;
-  color:#d6deec;
+.regex-group-bg1 {
+  background-color: #96b9fa;
+
+  .dark & {
+    background-color: #223c6e;
+  }
 }
 
-.regex-group-bg2{
-  background-color: #513c8c;
-;
+.regex-group-bg2 {
+  background-color: #c3adfe;
+
+  .dark & {
+    background-color: #513c8c;
+  }
 }
 
-.regex-group-bg3{
-  background-color: #59460e;
+.regex-group-bg3 {
+  background-color: #f8dd8c;
+
+  .dark & {
+    background-color: #59460e;
+  }
 }
 </style>

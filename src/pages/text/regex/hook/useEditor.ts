@@ -22,9 +22,7 @@ export default function (regexStr: Ref<string>, regexModifierArr: Ref<string[]>,
 
   function regexMatch() {
     inputStatus.value = undefined
-
     let deltaDecorations: monaco.editor.IModelDeltaDecoration[] = []
-
     const isGlobal = regexModifierArr.value.includes('g')
 
     try {
@@ -51,7 +49,7 @@ export default function (regexStr: Ref<string>, regexModifierArr: Ref<string[]>,
     decorations = editor.deltaDecorations(decorations, deltaDecorations)
   }
 
-  function createDeltaDecoration(startLineNumber: number, groupStartColumn: number, endLineNumber: number, groupEndColumn: number, className: string) {
+  function deltaDecorationFactory(startLineNumber: number, groupStartColumn: number, endLineNumber: number, groupEndColumn: number, className: string) {
     return {
       range: new monaco.Range(startLineNumber, groupStartColumn, endLineNumber, groupEndColumn),
       options: {
@@ -76,15 +74,15 @@ export default function (regexStr: Ref<string>, regexModifierArr: Ref<string[]>,
       const groupEndColumn = groupStartColumn + groupStr.length
 
       // 设置 group 背景
-      _deltaDecorations.push(createDeltaDecoration(startLineNumber, groupStartColumn, endLineNumber, groupEndColumn, groupBgClass[index % groupBgClass.length]))
+      _deltaDecorations.push(deltaDecorationFactory(startLineNumber, groupStartColumn, endLineNumber, groupEndColumn, groupBgClass[index % groupBgClass.length]))
 
       // 设置 macth 背景
-      _deltaDecorations.push(createDeltaDecoration(startLineNumber, startIndex, endLineNumber, groupStartColumn, 'regex-match-bg'))
+      _deltaDecorations.push(deltaDecorationFactory(startLineNumber, startIndex, endLineNumber, groupStartColumn, 'regex-match-bg'))
 
       startIndex = groupEndColumn
     })
 
-    _deltaDecorations.push(createDeltaDecoration(startLineNumber, startIndex, endLineNumber, endColumn, 'regex-match-bg'))
+    _deltaDecorations.push(deltaDecorationFactory(startLineNumber, startIndex, endLineNumber, endColumn, 'regex-match-bg'))
 
     return _deltaDecorations
   }
