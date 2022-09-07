@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { toCharArray } from '@meoc/utils'
+import { writeText } from '@tauri-apps/api/clipboard'
+import { useMessage } from 'naive-ui'
 import useInput from './hook/useInput'
 import useEditor from './hook/useEditor'
 import { regexModifierOptions } from '~/enum'
@@ -22,6 +24,13 @@ function onModifierChange(str: string[]) {
   regexModifier.value = str.join('')
   regexMatch()
 }
+
+const message = useMessage()
+
+async function copyRegex() {
+  await writeText(`/${regexStr.value}/${regexModifier.value}`)
+  message.success('复制成功')
+}
 </script>
 
 <template>
@@ -35,7 +44,7 @@ function onModifierChange(str: string[]) {
           :value="regexStr"
           :status="inputStatus"
           type="text"
-          placeholder="Tiny Input"
+          placeholder="Input Regex"
           @input="onRegexChange"
         >
           <template #suffix>
@@ -52,7 +61,7 @@ function onModifierChange(str: string[]) {
               </div>
             </n-popselect>
 
-            <div class="i-carbon-copy-file cursor-pointer hover:color-#43a564" @click="regexMatch" />
+            <div class="i-carbon-copy-file cursor-pointer hover:color-#43a564" @click="copyRegex" />
           </template>
         </n-input>
       </div>

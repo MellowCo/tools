@@ -20,6 +20,9 @@
         "scope": [
           "https://**"
         ]
+      },
+      "clipboard": {
+        "all": true
       }
     },
     "bundle": {

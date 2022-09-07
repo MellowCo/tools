@@ -62,7 +62,7 @@ export default function (regexStr: Ref<string>, regexModifierArr: Ref<string[]>,
   function calDeltaPos(range: monaco.Range, matchStr: string, groupStrs: string[]) {
     const { startLineNumber, startColumn, endLineNumber, endColumn } = range
     const _deltaDecorations: monaco.editor.IModelDeltaDecoration[] = []
-    let startIndex = startColumn
+    let currentColumn = startColumn
 
     groupStrs.forEach((groupStr, index) => {
       if (!groupStr)
@@ -77,12 +77,12 @@ export default function (regexStr: Ref<string>, regexModifierArr: Ref<string[]>,
       _deltaDecorations.push(deltaDecorationFactory(startLineNumber, groupStartColumn, endLineNumber, groupEndColumn, groupBgClass[index % groupBgClass.length]))
 
       // 设置 macth 背景
-      _deltaDecorations.push(deltaDecorationFactory(startLineNumber, startIndex, endLineNumber, groupStartColumn, 'regex-match-bg'))
+      _deltaDecorations.push(deltaDecorationFactory(startLineNumber, currentColumn, endLineNumber, groupStartColumn, 'regex-match-bg'))
 
-      startIndex = groupEndColumn
+      currentColumn = groupEndColumn
     })
 
-    _deltaDecorations.push(deltaDecorationFactory(startLineNumber, startIndex, endLineNumber, endColumn, 'regex-match-bg'))
+    _deltaDecorations.push(deltaDecorationFactory(startLineNumber, currentColumn, endLineNumber, endColumn, 'regex-match-bg'))
 
     return _deltaDecorations
   }
