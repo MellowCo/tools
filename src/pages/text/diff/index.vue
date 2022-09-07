@@ -31,12 +31,12 @@ function inline(value: boolean) {
 </script>
 
 <template>
-  <div class="absolute w-full h-full p-3 box-border">
+  <div class="absolute wh-full p-3 box-border flex flex-col">
     <div class="bg-base p-3">
       <n-checkbox label="行内比较" @update:checked="inline" />
     </div>
 
-    <div class="flex bg-base h-full">
+    <div class="flex-1 bg-base">
       <div ref="diffRef" class="w-full h-full" />
     </div>
   </div>

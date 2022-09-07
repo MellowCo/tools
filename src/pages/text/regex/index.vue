@@ -34,8 +34,8 @@ async function copyRegex() {
 </script>
 
 <template>
-  <div class="absolute wh-full box-border p-3">
-    <div class="bg-base p-3 mb-4">
+  <div class="absolute wh-full box-border p-3 flex flex-col">
+    <div class="bg-base p-3 mb-3">
       <div class="mb-2">
         正则表达式
       </div>
@@ -67,12 +67,12 @@ async function copyRegex() {
       </div>
     </div>
 
-    <div class="flex flex-col box-border bg-base w-full h-1/2 p-3 h-85%">
+    <div class="flex-1 flex flex-col bg-base p-3 box-border">
       <div class="mb-2">
         文本
       </div>
 
-      <div class="wh-full">
+      <div class="flex-1">
         <div ref="regexEditorRef" class="wh-full" />
       </div>
     </div>
